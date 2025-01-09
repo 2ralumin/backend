@@ -265,7 +265,7 @@ public class SchedulerService {
                     schedule.changeEventStatus(ScheduleStatus.END);
                     schedule.changeRecruitStatus(ScheduleStatus.END);
                     //파트너, 출석 반영
-                    setEventResult(e);
+                    //setEventResult(e);
                     scheduleRepository.delete(schedule);//이벤트 종료 후 스케줄 삭제
                 }
             }finally {
@@ -337,7 +337,7 @@ public class SchedulerService {
         }
     }
 
-
+/*
     //이벤트 파트너, 참여인원 반영
     @Transactional
     public void setEventResult(Event e){
@@ -424,6 +424,8 @@ public class SchedulerService {
 
         }
     }
+
+ */
 
     private Instant toInstant(LocalDateTime localDateTime){
         return localDateTime.atZone(KOREA).toInstant();
