@@ -62,6 +62,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/signup/**").hasRole("NEW")
+                        .requestMatchers("/api/oauth/login/reissue").hasAnyRole("ADMIN", "USER", "COACH", "WAIT", "REJECT")
                         .requestMatchers(
                                 "/api/sms/**",
                                 "/api/oauth/**",
