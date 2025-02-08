@@ -24,4 +24,10 @@ public class CookieService {
 
         response.setHeader("Set-Cookie", cookie.toString());
     }
+
+    public void deleteRefreshTokenCookie(HttpServletResponse response) {
+        Cookie deleteCookie = new Cookie("refreshToken", null);
+        deleteCookie.setMaxAge(0);       // 즉시 만료
+        response.addCookie(deleteCookie);
+    }
 }

@@ -66,6 +66,7 @@ public class SecurityConfig {
                                 "/api/sms/**",
                                 "/api/oauth/**",
                                 "/api/login/**",
+                                "/api/logout/**",
                                 "/api/accountId/**",
                                 "/api/new-password/**").permitAll()
                         .requestMatchers(

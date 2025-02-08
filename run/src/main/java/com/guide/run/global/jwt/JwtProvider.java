@@ -16,6 +16,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +29,7 @@ import java.util.Base64;
 import java.util.Date;
 
 
+@Log4j2
 @Component
 @RequiredArgsConstructor
 public class JwtProvider {
@@ -35,7 +37,7 @@ public class JwtProvider {
     private String secretKey;
    // public static final long TOKEN_VALID_TIME = 1000L * 60 * 30 ; // 30분
     public static final long TOKEN_VALID_TIME = 1000L *60 *60 ;
-    public static final long REFRESH_TOKEN_VALID_TIME = 1000L * 60 * 60 * 24 * 365 * 50; // 50년
+    public static final long REFRESH_TOKEN_VALID_TIME = 1000L * 60 * 60 * 24 * 30; // 한 달
 
     public static final long TMP_VALID_TIME = 1000L*60*30; //문자인증 후 주는 임시토큰 30분
 
@@ -133,10 +135,9 @@ public class JwtProvider {
         return token.getToken();
     }
 
-    public String getPrivateIdForRefreshToken(RefreshTokenDto refreshToken) {
-        RefreshToken token = refreshTokenRepository.findById(refreshToken.getRefreshToken()).orElseThrow(() -> new NotValidRefreshTokenException());
-        return token.getPrivateId();
-    }public String getPrivateIdForRefreshToken(String refreshToken) {
+
+    public String getPrivateIdForRefreshToken(String refreshToken) {
+
         RefreshToken token = refreshTokenRepository.findById(refreshToken).orElseThrow(() -> new NotValidRefreshTokenException());
         return token.getPrivateId();
     }
